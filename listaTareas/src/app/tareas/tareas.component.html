@@ -1,0 +1,27 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<header>
+  <h1>🌟 TODO List: Organiza tu Vida</h1>
+</header>
+
+<main class="tareas-container">
+  <h2>Lista de Tareas</h2>
+  <form class="tarea-form" (ngSubmit)="agregarTarea()">
+    <input type="text" placeholder="Título de la tarea" [(ngModel)]="nuevaTarea.titulo" name="titulo" required />
+    <textarea placeholder="Descripción de la tarea" [(ngModel)]="nuevaTarea.descripcion" name="descripcion"></textarea>
+    <button type="submit" class="btn agregar">➕ Agregar Tarea</button>
+  </form>
+  
+  <ul class="tareas-lista">
+    <li *ngFor="let tarea of tareas" class="tarea-item">
+      <div class="tarea-info">
+        <input type="checkbox" [checked]="tarea.completada" (change)="cambiarEstadoTarea(tarea)" />
+        <span [class.completada]="tarea.completada">{{ tarea.titulo }} - {{ tarea.descripcion }}</span>
+      </div>
+      <div class="tarea-acciones">
+        <button (click)="editarTarea(tarea)" class="btn editar">✏️ Editar</button>
+        <button (click)="eliminarTarea(tarea.id)" class="btn eliminar">🗑️ Eliminar</button>
+      </div>
+    </li>
+  </ul>
+</main>
